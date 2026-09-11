@@ -1,6 +1,9 @@
 import requests
 import sys
 import datetime
+import os
+
+api_key = os.environ.get("OPENWEATHER_API_KEY")
 
 if len(sys.argv) != 2:
     sys.exit()
@@ -10,11 +13,11 @@ try:
         "https://api.openweathermap.org/data/2.5/weather",
         params={
             "q": sys.argv[1], 
-            "appid": "16d1947513ef69efe26d38d951d5d6c8", 
+            "appid": api_key, 
             "units": "metric"
             }
         )
-    
+        
     if weather.status_code == 200:
         weather_data = weather.json()
         temperature = weather_data["main"]["temp"]
